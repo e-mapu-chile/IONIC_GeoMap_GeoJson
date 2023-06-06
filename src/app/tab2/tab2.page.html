@@ -1,0 +1,123 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Red Neural - Clasificación de Riesgo Movimiento TBB
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Red Neural - Clasificación de Riesgo Movimiento TBB </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="2" class="cell-class">Región:</ion-col>
+        <ion-col size="2" class="cell-class">
+          <ion-input type="number" [(ngModel)]="region" style="background-color: white;color:black"></ion-input>
+        </ion-col>
+        <ion-col class="cell-class">
+          <ion-button color="tertiary" (click)="predecirCategoriaRegion()" size="small">
+            <ion-icon name="bookmark"></ion-icon>Por Región
+          </ion-button>
+        </ion-col>
+        <ion-col class="cell-class">
+          <ion-button (click)="predecirCategoriaAllegion()" size="small">
+            <ion-icon name="bookmarks"></ion-icon>Todas Regiones
+          </ion-button>
+        </ion-col>
+        <ion-col class="cell-class">
+          <ion-button (click)="quitarTodo()" color="danger" size="small">
+            <ion-icon name="trash-outline"></ion-icon>Limpiar Mapa
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="ir()" size="small">GO</ion-button>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+
+    <div id="mapId4" style="width: 100%; height: 70%" class="mapsd"></div>
+
+   <ion-grid>
+      <ion-row>
+        <ion-col size="3" class="cell-class">
+
+          <ion-checkbox id="terms" (ionChange)="onLeche($event)"></ion-checkbox>
+          Rubro Leche
+        </ion-col>
+        <ion-col size="3" class="cell-class">
+
+          <ion-checkbox id="terms2" (ionChange)="onCarne($event)"></ion-checkbox>
+          Rubro Carne
+        </ion-col>
+        <ion-col size="3" class="cell-class">
+
+          <ion-checkbox id="terms3" (ionChange)="onOtro($event)"></ion-checkbox>
+          Otros Rubros
+        </ion-col>
+        <ion-col size="3" class="cell-class">
+
+          <ion-checkbox id="terms5" (ionChange)="onVNB($event)"></ion-checkbox>
+          Vigilancia Negativa Baja
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row>
+
+        <ion-col size="3" class="cell-class">
+
+          <ion-checkbox id="terms6" (ionChange)="onVNM($event)"></ion-checkbox>
+          Vigilancia Negativa Media
+        </ion-col>
+        <ion-col size="3" class="cell-class">
+
+          <ion-checkbox id="terms7" (ionChange)="onVNA($event)"></ion-checkbox>
+          Vigilancia Negativa Alta
+        </ion-col>
+        <ion-col size="3" class="cell-class">
+
+          <ion-checkbox id="terms9" (ionChange)="onPc($event)"></ion-checkbox>
+          Positivo Prueba de Campo
+        </ion-col>
+        <ion-col size="3" class="cell-class">
+
+          <ion-checkbox id="terms10" (ionChange)="onLab($event)"></ion-checkbox>
+          Positivo Laboratorio
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="3" class="cell-class">
+
+          <ion-checkbox id="terms11" (ionChange)="onSin($event)"></ion-checkbox>
+          Sin Control
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+    <div id="panelTool" >
+    <ion-grid style="background-color: black;">
+      <ion-row>
+        <ion-col>
+          <ion-input type="text"></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-button>IR</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+        
+      
+    </div>
+
+  </ion-content>
+
+
+  <app-explore-container name="Riesgo Movimiento"></app-explore-container>
+</ion-content>

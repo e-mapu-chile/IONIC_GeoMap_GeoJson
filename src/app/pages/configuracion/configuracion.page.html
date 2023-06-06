@@ -1,0 +1,240 @@
+<ion-header>
+  <ion-toolbar color="azul">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="1">
+          <img src="../../../assets/img/logo-sag.png" width="30" height="30" />
+        </ion-col>
+        <ion-col size="11">
+          <ion-title>Laboratorio Machine Learning - Configuración</ion-title>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+    <ion-button routerLink="/home" slot="end">
+      <ion-icon name="home"></ion-icon>
+    </ion-button>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <hr>
+  <ion-item>
+    <p> Ingrese los distintos valores segun la información que se procesara al momento de descargar los DataSets</p>
+  </ion-item>
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col class="bordeH" size="4">
+        Fecha desde
+      </ion-col>
+      <ion-col class="bordeF" size="8">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-datetime presentation="date" (ionChange)="handlefecha($event)"></ion-datetime>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-input disabled="disabled" type="text" [(ngModel)]="fechaDesde"></ion-input>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <!-- <ion-datetime-button datetime="datetime"></ion-datetime-button>
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime id="datetime"></ion-datetime>
+          </ng-template>
+        </ion-modal> -->
+
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="4">
+        Cantidad de dias hacia atras
+      </ion-col>
+      <ion-col class="borde" size="8">
+        <ion-input type="number" [(ngModel)]="diasAtras"></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-item>
+    <h4>Nivel Tipo Establecimiento - Rubro</h4>
+  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="bordeH">
+        Predio - Leche
+      </ion-col>
+      <ion-col class="bordeH">
+        Predio - Carne
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="borde">
+        <ion-select interface="action-sheet" placeholder="Seleccione" (ionChange)="handlepredioLeche($event)"
+          [(ngModel)]="leche">
+          <ion-select-option value="1">Bajo</ion-select-option>
+          <ion-select-option value="5">Medio</ion-select-option>
+          <ion-select-option value="10">Alto</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col class="borde">
+        <ion-select interface="action-sheet" placeholder="Seleccione" (ionChange)="handlepredioCarne($event)"
+          [(ngModel)]="carne">
+          <ion-select-option value="1">Bajo</ion-select-option>
+          <ion-select-option value="5">Medio</ion-select-option>
+          <ion-select-option value="10">Alto</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col class="bordeH">
+        Matadero - Carne
+      </ion-col>
+      <ion-col class="bordeH">
+        Control Fronterizo - Animal Vivo
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="borde">
+        <ion-select interface="action-sheet" placeholder="Seleccione" (ionChange)="handlemataderoCarne($event)"
+          [(ngModel)]="mata">
+          <ion-select-option value="1">Bajo</ion-select-option>
+          <ion-select-option value="5">Medio</ion-select-option>
+          <ion-select-option value="10">Alto</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col class="borde">
+        <ion-select interface="action-sheet" placeholder="Seleccione" (ionChange)="handlecontrolAnimalVivo($event)"
+          [(ngModel)]="centro">
+          <ion-select-option value="1">Bajo</ion-select-option>
+          <ion-select-option value="5">Medio</ion-select-option>
+          <ion-select-option value="10">Alto</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col class="bordeH">
+        Centro - Rodeo
+      </ion-col>
+      <ion-col class="bordeH">
+        Predio - Crianza Familiar
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="borde">
+        <ion-select interface="action-sheet" placeholder="Seleccione" (ionChange)="handlecentroRodeo($event)"
+          [(ngModel)]="rodeo">
+          <ion-select-option value="1">Bajo</ion-select-option>
+          <ion-select-option value="5">Medio</ion-select-option>
+          <ion-select-option value="10">Alto</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col class="borde">
+        <ion-select interface="action-sheet" placeholder="Seleccione" (ionChange)="handlepredioCrianza($event)"
+          [(ngModel)]="crianza">
+          <ion-select-option value="1">Bajo</ion-select-option>
+          <ion-select-option value="5">Medio</ion-select-option>
+          <ion-select-option value="10">Alto</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col class="bordeH">
+        Predio - Compra y Venta
+      </ion-col>
+      <ion-col class="bordeH">
+        Feria - Compra y Venta
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="borde">
+        <ion-select interface="action-sheet" placeholder="Seleccione" (ionChange)="handlepredioCompra($event)"
+          [(ngModel)]="compra">
+          <ion-select-option value="1">Bajo</ion-select-option>
+          <ion-select-option value="5">Medio</ion-select-option>
+          <ion-select-option value="10">Alto</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col class="borde">
+        <ion-select interface="action-sheet" placeholder="Seleccione" (ionChange)="handleferiaCompra($event)"
+          [(ngModel)]="feria">
+          <ion-select-option value="1">Bajo</ion-select-option>
+          <ion-select-option value="5">Medio</ion-select-option>
+          <ion-select-option value="10">Alto</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-item>
+    <h4>Nivel Flujo FMA </h4>
+  </ion-item>
+  <p>Valores que indican el nivel de flujo de entrada y salida para los predios. Es importante tener en cuenta que estos
+    valores son aplicados a datos historicos</p>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="bordeH">¿Cuantos números de FMA son considerado un nivel Alto de flujo?</ion-col>
+      <ion-col class="borde">
+        <ion-input type="number" [(ngModel)]="flujoAlto"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH">¿Cuantos números de FMA son considerado un nivel Medio Alto de flujo?</ion-col>
+      <ion-col class="borde">
+        <ion-input type="number" [(ngModel)]="flujoMedioAlto"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH">¿Cuantos números de FMA son considerado un nivel Medio de flujo?</ion-col>
+      <ion-col class="borde">
+        <ion-input type="number" [(ngModel)]="flujoMedio"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH">¿Cuantos números de FMA son considerado un nivel Bajo de flujo?</ion-col>
+      <ion-col class="borde">
+        <ion-input type="number" [(ngModel)]="flujoBajo"></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-item>
+    <h4>Nivel Vigilancia </h4>
+  </ion-item>
+  <p>Valores que indican el nivel de vigilancia para los predios. Es importante tener en cuenta que estos
+    valores son aplicados a datos historicos</p>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="bordeH">¿Cuantos protocolos son considerado una vigilancia Alta?</ion-col>
+      <ion-col class="borde">
+        <ion-input type="number" [(ngModel)]="vigilanciaAlta"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH">¿Cuantos protocolos son considerado una vigilancia Media?</ion-col>
+      <ion-col class="borde">
+        <ion-input type="number" [(ngModel)]="vigilanciaMedia"></ion-input>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH">¿Cuantos protocolos son considerado una vigilancia Baja?</ion-col>
+      <ion-col class="borde">
+        <ion-input type="number" [(ngModel)]="vigilanciaBaja"></ion-input>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+  <ion-item>
+    <ion-button size="smnall" style="width:100%" (click)="guardar()">Guardar</ion-button>
+  </ion-item>
+</ion-content>

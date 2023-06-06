@@ -1,0 +1,252 @@
+<ion-header>
+  <ion-toolbar color="verde2">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="1">
+          <img src="../../../assets/img/logo-sag.png" width="30" height="30" />
+        </ion-col>
+        <ion-col size="11">
+          <h6>RDPPSSA 1.4</h6>
+          <ion-label size="small">Reportes Division Proteccion Pecuaria - Sanidad Animal </ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button routerLink="/descargas-excel" slot="end">
+      <ion-icon name="home"></ion-icon>
+    </ion-button>
+
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-item>
+    <h3 style="width: 100%;text-align: center;">Planilla Influenza Aviar Pivote v1</h3>
+  </ion-item>
+  <ion-item>
+    <p> Seleccione la región para descargar el set de datos</p>
+  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button color="danger"  size="small" (click)="eliminarDescargas()">
+          <ion-icon name="trash-bin"></ion-icon>
+          Eliminar Descargas
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button color="azul"  size="small" (click)="descargarSabanaExcel()">
+          <ion-icon name="color-wand"></ion-icon>
+          Descargar Planilla
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        Región
+      </ion-col>
+      <ion-col class="bordeH" size="3">
+        Existe DataSet
+      </ion-col>
+      <ion-col class="bordeH" size="4">
+        Acción
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE TARAPACÁ
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <p *ngIf="r1">SI</p>
+        <p *ngIf="!r1" style="color:red;">NO</p>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <ion-button size="small" (click)="descargar(1)">Descargar</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE ANTOFAGASTA
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <p *ngIf="r2">SI</p>
+        <p *ngIf="!r2" style="color:red;">NO</p>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <ion-button size="small" (click)="descargar(2)">Descargar</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE ATACAMA
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <p *ngIf="r3">SI</p>
+        <p *ngIf="!r3" style="color:red;">NO</p>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <ion-button size="small" (click)="descargar(3)">Descargar</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE COQUIMBO
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <p *ngIf="r4">SI</p>
+        <p *ngIf="!r4" style="color:red;">NO</p>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <ion-button size="small" (click)="descargar(4)">Descargar</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE VALPARAISO
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <p *ngIf="r5">SI</p>
+        <p *ngIf="!r5" style="color:red;">NO</p>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <ion-button size="small" (click)="descargar(5)">Descargar</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DEL LIBERTADOR GRAL. BERNARDO OHIGGINS
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <p *ngIf="r6">SI</p>
+        <p *ngIf="!r6" style="color:red;">NO</p>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <ion-button size="small" (click)="descargar(6)">Descargar</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DEL MAULE
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <p *ngIf="r7">SI</p>
+        <p *ngIf="!r7" style="color:red;">NO</p>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <ion-button size="small" (click)="descargar(7)">Descargar</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DEL BIO BIO
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <p *ngIf="r8">SI</p>
+        <p *ngIf="!r8" style="color:red;">NO</p>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <ion-button size="small" (click)="descargar(8)">Descargar</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE LA ARAUCANÍA
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <p *ngIf="r9">SI</p>
+        <p *ngIf="!r9" style="color:red;">NO</p>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <ion-button size="small" (click)="descargar(9)">Descargar</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE LOS LAGOS
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <p *ngIf="r10">SI</p>
+        <p *ngIf="!r10" style="color:red;">NO</p>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <ion-button size="small" (click)="descargar(10)">Descargar</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE AYSÉN
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <p *ngIf="r11">SI</p>
+        <p *ngIf="!r11" style="color:red;">NO</p>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <ion-button size="small" (click)="descargar(11)">Descargar</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE MAGALLANES Y LA ANTÁRTICA CHILENA
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <p *ngIf="r12">SI</p>
+        <p *ngIf="!r12" style="color:red;">NO</p>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <ion-button size="small" (click)="descargar(12)">Descargar</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN METROPOLITANA DE SANTIAGO
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <p *ngIf="r13">SI</p>
+        <p *ngIf="!r13" style="color:red;">NO</p>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <ion-button size="small" (click)="descargar(13)">Descargar</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE LOS RÍOS
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <p *ngIf="r14">SI</p>
+        <p *ngIf="!r14" style="color:red;">NO</p>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <ion-button size="small" (click)="descargar(14)">Descargar</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE ARICA Y PARINACOTA
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <p *ngIf="r15">SI</p>
+        <p *ngIf="!r15" style="color:red;">NO</p>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <ion-button size="small" (click)="descargar(15)">Descargar</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE ÑUBLE
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <p *ngIf="r16">SI</p>
+        <p *ngIf="!r16" style="color:red;">NO</p>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <ion-button size="small" (click)="descargar(16)">Descargar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

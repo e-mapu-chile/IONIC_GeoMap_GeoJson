@@ -1,0 +1,131 @@
+@import '~swiper/scss';
+@import '~@ionic/angular/css/ionic-swiper';
+
+
+.cell-class {
+    
+    border-width: .01em; 
+    // border-style:solid; margin-bottom : -1px;
+    
+    font-size:13px;
+  }
+
+
+  .leaflet-routing-container .leaflet-routing-error {
+    width: 320px;
+    background-color: white;
+    padding-top: 4px;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    display: none;
+}
+
+.bordeH {
+  border: 1px solid #6168e0;//border: 1px solid hsl(0, 0%, 100%);
+  background-color: #006e5e;
+  color: white;
+  font-size: small;
+  border-radius: 10px;
+  
+ 
+}
+
+.borde {
+  border: 1px solid #6168e0;
+  background-color: white;
+  color: green;
+  font-size: small;
+  text-align: center;
+  border-radius: 10px;
+
+}
+.borde2 {
+  border: 1px solid #6168e0;
+  background-color: white;
+  color: green;
+  font-size: small;
+  text-align: left;
+ 
+
+}
+
+.bordeH2 {
+  border: 1px solid #6168e0;//border: 1px solid hsl(0, 0%, 100%);
+  background-color: #006e5e;
+  color: white;
+  font-size: small; 
+  
+  
+ 
+}
+
+
+.activemarker{
+  
+  border: 10px solid black;
+  
+}
+
+
+
+.cuboDiaHeader{
+  
+  width: 20px;
+  height: 58px;
+  font-size: small;
+  border-radius: 3px;
+  border: 1px solid green;
+  text-align: left;
+  
+}
+
+.cuboDia{
+  
+  width: 60px;
+  height: 28px;
+  font-size: small;
+  border-radius: 3px;
+  border: 1px solid green;
+  text-align: left;
+   
+}
+
+.cuboDiaMini{
+  
+  width: 5px;
+  height: 38px;
+  font-size: small;
+  border: 1px solid green;
+  text-align: left;
+}
+
+.sinAccion{
+  background-color: green;
+  color: white;
+}
+
+.pastando{
+ // background-color: #1DB954;
+ color: black;
+}
+
+
+.bordeH {
+  border: 1px solid hsl(0, 0%, 100%);
+  background-color: #006e5e;
+  color: white;
+  font-size: small;
+  height: 40px;
+  border-radius: 20%;
+  text-align: center;
+}
+
+.borde {
+  border: 1px solid #6168e0;
+  background-color: white;
+  color: green;
+  font-size: small;
+  height: 40px;
+  border-radius: 20%;
+  text-align: center;
+}

@@ -1,0 +1,245 @@
+<ion-header>
+  <ion-toolbar color="verde2">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="1">
+          <img src="../../../assets/img/logo-sag.png" width="30" height="30" />
+        </ion-col>
+        <ion-col size="11">
+          <h6>RDPPSSA 1.4</h6>
+          <ion-label size="small">Reportes Division Proteccion Pecuaria - Sanidad Animal </ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button routerLink="/carga-informacion" slot="end">
+      <ion-icon name="home"></ion-icon>
+    </ion-button>
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <h3 style="width: 100%;text-align: center;">Carga de Mortalidades</h3>
+  </ion-item>
+  <ion-item>
+    <p style="font-size: 10px;"> Suba la planilla por region , debe generar una planilla con las siguientes columnas (ejemplo sexta región):
+      Email |	Fecha de la visita |	comuna  | 1.-Seleccione la especie |	1.-Total de individuos encontrados muertos	
+      |1.-Total de individuos eutanasiados |	2.-Seleccione la 2° especie	| 2.-Total de individuos encontrados muertos
+      |2.-Total de individuos eutanasiados |	3.-Seleccione la 3° especie |	3.-Total de individuos encontrados muertos
+      |3.-Total de individuos eutanasiados |	4.-Seleccione la 4° especie |	4.-Total de individuos encontrados muertos
+      |	4.-Total de individuos eutanasiados	| 5.-Seleccione la 5° especie |	5.-Total de individuos encontrados muertos	
+      | 5.-Total de individuos eutanasiados	| Seleccione el lugar del primer hallazgo de Pichilemu	 | 
+      Seleccione el sitio de Plaza Villa Alto Pucará	| Seleccione el lugar del primer hallazgo de Navidad |
+      	Seleccione el sitio de Playa Pupuya |	Seleccione el sitio de | Laguna Petrel	| Seleccione el sitio de Playa Tanumé |
+        	Seleccione el sitio de Playa Puertecillo	| Seleccione el lugar del primer hallazgo de Litueche
+
+    </p>
+  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+
+
+      </ion-col>
+      <ion-col>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        Región
+      </ion-col>
+      <ion-col class="bordeH" size="3">
+        Ultima carga
+      </ion-col>
+      <ion-col class="bordeH" size="4">
+        Acción
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE ARICA Y PARINACOTA
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <b>{{fechaAricaRegion}}</b>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <input type="file" class="btn-primary" (change)="onFileChange($event,'ARICA')" multiple="false" /> 
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE TARAPACÁ
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <b>{{fechaTarapacaRegion}}</b>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <input type="file" class="btn-primary" (change)="onFileChange($event,'TARAPACA')" multiple="false" /> 
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE ANTOFAGASTA
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <b>{{fechaAntofaRegion}}</b>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <input type="file" class="btn-primary" (change)="onFileChange($event,'ANTOFAGASTA')" multiple="false" /> 
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE ATACAMA
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <b>{{fechaAtacamaRegion}}</b>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <input type="file" class="btn-primary" (change)="onFileChange($event,'ATACAMA')" multiple="false" /> 
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE COQUIMBO
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <b>{{fechaCoquimboRegion}}</b>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <input type="file" class="btn-primary" (change)="onFileChange($event,'COQUIMBO')" multiple="false" /> 
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE VALPARAISO
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <b>{{fechaQuintaRegion}}</b>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <input type="file" class="btn-primary" (change)="onFileChange($event,'VALPARAISO')" multiple="false" /> 
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN METROPOLITANA DE SANTIAGO
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <b>{{fechaRMRegion}}</b>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <input type="file" class="btn-primary" (change)="onFileChange($event,'METROPOLITANA')" multiple="false" />
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DEL LIBERTADOR GRAL. BERNARDO OHIGGINS
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <b>{{fechaSextaRegion}}</b>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <input type="file" class="btn-primary" (change)="onFileChange($event,'OHIGGINS')" multiple="false" />
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DEL MAULE
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <b>{{fecha7Region}}</b>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <input type="file" class="btn-primary" (change)="onFileChange($event,'MAULE')" multiple="false" />
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE ÑUBLE
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <b>{{fechaNubleRegion}}</b>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <input type="file" class="btn-primary" (change)="onFileChange($event,'ÑUBLE')" multiple="false" />
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DEL BIO BIO
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <b>{{fechaBioBioRegion}}</b>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <input type="file" class="btn-primary" (change)="onFileChange($event,'BIOBIO')" multiple="false" />
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE LA ARAUCANÍA
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <b>{{fechaNovenaRegion}}</b>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <input type="file" class="btn-primary" (change)="onFileChange($event,'ARAUCANIA')" multiple="false" />
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE LOS RÍOS
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <b>{{fechaRiosRegion}}</b>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <input type="file" class="btn-primary" (change)="onFileChange($event,'RIOS')" multiple="false" />
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE LOS LAGOS
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <b>{{fechaLagosRegion}}</b>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <input type="file" class="btn-primary" (change)="onFileChange($event,'LAGOS')" multiple="false" />
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE AYSÉN
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <b>{{fechaAysenRegion}}</b>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <input type="file" class="btn-primary" (change)="onFileChange($event,'AYSEN')" multiple="false" />
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="bordeH" size="5">
+        REGIÓN DE MAGALLANES Y LA ANTÁRTICA CHILENA
+      </ion-col>
+      <ion-col class="borde" size="3">
+        <b>{{fechaMagallanesRegion}}</b>
+      </ion-col>
+      <ion-col class="borde" size="4">
+        <input type="file" class="btn-primary" (change)="onFileChange($event,'MAGALLANES')" multiple="false" />
+      </ion-col>
+    </ion-row>
+    
+   
+  
+   
+  </ion-grid>
+
+</ion-content>

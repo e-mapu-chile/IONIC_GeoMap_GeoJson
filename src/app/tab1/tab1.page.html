@@ -1,0 +1,402 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="verde2">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="1">
+          <img src="../../../assets/img/logo-sag.png" width="30" height="30" />
+        </ion-col>
+        <ion-col size="11">
+          <ion-title>
+            Dinamica Riesgo de Movimiento para la Brucelosis Bovina
+          </ion-title>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-button slot="end" color="naranjo1" (click)="menuShow()">
+      <ion-icon name="filter"></ion-icon>
+    </ion-button>
+    <ion-button slot="end" color="rojosanitario" (click)="filtroSanidadShow()">
+      <ion-icon name="medkit"></ion-icon>
+    </ion-button>
+    <ion-button slot="end" color="morado" (click)="filtroFmaShow()">
+      <ion-icon name="trail-sign"></ion-icon>
+    </ion-button>
+    <ion-button slot="end" color="warning" (click)="filtroPlay()">
+      <ion-icon name="film"></ion-icon>
+    </ion-button>
+
+    <ion-button routerLink="/home" color="azulanimal" slot="end">
+      <ion-icon name="home"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+
+
+    <div *ngIf="menuTopShow">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3" class="borde">
+            <ion-select style="height: 30px;" [(ngModel)]="regionSelect" interface="action-sheet"
+              placeholder="Seleccione Region" (ionChange)="handleChange($event)">
+              <ion-select-option *ngIf="r1" value="0">Seleccione</ion-select-option>
+              <ion-select-option *ngIf="r1" value="1">REGIÓN DE TARAPACÁ</ion-select-option>
+              <ion-select-option *ngIf="r2" value="2">REGIÓN DE ANTOFAGASTA</ion-select-option>
+              <ion-select-option *ngIf="r3" value="3">REGIÓN DE ATACAMA</ion-select-option>
+
+              <ion-select-option *ngIf="r4" value="4">REGIÓN DE COQUIMBO</ion-select-option>
+              <ion-select-option *ngIf="r5" value="5">REGIÓN DE VALPARAISO</ion-select-option>
+              <ion-select-option *ngIf="r6" value="6">REGIÓN DEL LIBERTADOR GRAL. BERNARDO OHIGGINS
+              </ion-select-option>
+              <ion-select-option *ngIf="r7" value="7">REGIÓN DEL MAULE</ion-select-option>
+              <ion-select-option *ngIf="r8" value="8">REGIÓN DEL BIO BIO</ion-select-option>
+              <ion-select-option *ngIf="r9" value="9">REGIÓN DE LA ARAUCANÍA</ion-select-option>
+              <ion-select-option *ngIf="r10" value="10">REGIÓN DE LOS LAGOS</ion-select-option>
+              <ion-select-option *ngIf="r11" value="11">REGIÓN DE AYSÉN</ion-select-option>
+              <ion-select-option *ngIf="r12" value="12">REGIÓN DE MAGALLANES Y LA ANTÁRTICA CHILENA
+              </ion-select-option>
+              <ion-select-option *ngIf="r13" value="13">REGIÓN METROPOLITANA DE SANTIAGO</ion-select-option>
+              <ion-select-option *ngIf="r14" value="14">REGIÓN DE LOS RÍOS</ion-select-option>
+              <ion-select-option *ngIf="r15" value="15">REGIÓN DE ARICA Y PARINACOTA</ion-select-option>
+              <ion-select-option *ngIf="r16" value="16">REGIÓN DE ÑUBLE</ion-select-option>
+            </ion-select>
+          </ion-col>
+
+          <ion-col class="borde" size="3">
+            <ion-select interface="action-sheet" placeholder="Seleccione Sector" (ionChange)="handleChange2($event)">
+              <ion-select-option style="font-size: 4px;" *ngFor="let item of selectListOficina"
+                value="{{item.oficinaId}}">{{item.nombre}}</ion-select-option>
+            </ion-select>
+          </ion-col>
+
+          <ion-col class="borde" size="3">
+            <ion-button color="tertiary" (click)="predecirCategoriaRegion()" size="small"
+              style="width: 90%;height: 30px;">
+              <ion-icon name="bookmark"></ion-icon>Categorizar
+            </ion-button>
+          </ion-col>
+
+          <ion-col class="borde" size="3">
+            <ion-button (click)="quitarTodo()" color="danger" size="small" style="width: 90%;height: 30px;">
+              <ion-icon name="trash-outline"></ion-icon>Limpiar
+            </ion-button>
+          </ion-col>
+
+
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div *ngIf="filtroSanitario">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4">
+            <ion-grid>
+              <ion-row>
+                <ion-col class="borde" size="12"><b>Riesgo Tipo Establecimiento - Rubro</b></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="borde">
+
+                  Alto
+
+                </ion-col>
+                <ion-col class="borde">
+                  Medio
+
+                </ion-col>
+                <ion-col class="borde">
+                  Bajo
+
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="borde">
+                  <ion-button *ngIf="rubroLeche == 0" id="nCA" color="danger" (click)="onLeche()">
+                    <ion-icon name="people-outline"> </ion-icon>
+                  </ion-button>
+                  <ion-button *ngIf="rubroLeche == 1" style="border-radius: 12px; border: 5px solid silver" id="nCA"
+                    color="danger" (click)="onLeche()">
+                    <ion-icon name="people-outline"> </ion-icon>
+                  </ion-button>
+
+                </ion-col>
+                <ion-col class="borde">
+                  <ion-button *ngIf="rubroCarne == 0" id="nCM" color="warning" (click)="onCarne()">
+                    <ion-icon name="people-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button *ngIf="rubroCarne == 1" style="border-radius: 12px; border: 5px solid silver" id="nCM"
+                    color="warning" (click)="onCarne()">
+                    <ion-icon name="people-outline"></ion-icon>
+                  </ion-button>
+                </ion-col>
+                <ion-col class="borde">
+                  <ion-button *ngIf="rubroOtros == 0" id="nCB" color="verde2" (click)="onOtro()">
+                    <ion-icon name="people-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button *ngIf="rubroOtros == 1" style="border-radius: 12px; border: 5px solid silver" id="nCB"
+                    color="verde2" (click)="onOtro()">
+                    <ion-icon name="people-outline"></ion-icon>
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+          <ion-col size="4">
+            <ion-grid>
+              <ion-row>
+                <ion-col class="borde" size="12"><b>Nivel de Vigilancia</b></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="borde" size="3">
+                  Sin Vigilancia
+                </ion-col>
+                <ion-col class="borde" size="3">
+                  Baja
+                </ion-col>
+                <ion-col class="borde" size="3">
+                  Media
+                </ion-col>
+                <ion-col class="borde" size="3">
+                  Alta
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="borde" size="3">
+
+                  <ion-button *ngIf="sinControl == 0" id="sV" color="cafe" (click)="onSin()">
+                    <ion-icon name="flask-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button *ngIf="sinControl == 1" style="border-radius: 12px; border: 5px solid silver" id="sV"
+                    color="cafe" (click)="onSin()">
+                    <ion-icon name="flask-outline"></ion-icon>
+                  </ion-button>
+
+                </ion-col>
+                <ion-col class="borde" size="3">
+                  <ion-button *ngIf="nVigilanciaBaja == 0" id="nvB" color="danger" (click)="onVNB()">
+                    <ion-icon name="flask-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button *ngIf="nVigilanciaBaja == 1" style="border-radius: 12px; border: 5px solid silver"
+                    id="nvB" color="danger" (click)="onVNB()">
+                    <ion-icon name="flask-outline"></ion-icon>
+                  </ion-button>
+                </ion-col>
+                <ion-col class="borde" size="3">
+
+                  <ion-button *ngIf="nVigilanciaMedia == 0" id="nvM" color="warning" (click)="onVNM()">
+                    <ion-icon name="flask-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button *ngIf="nVigilanciaMedia == 1" style="border-radius: 12px; border: 5px solid silver"
+                    id="nvM" color="warning" (click)="onVNM()">
+                    <ion-icon name="flask-outline"></ion-icon>
+                  </ion-button>
+                </ion-col>
+                <ion-col class="borde" size="3">
+                  <ion-button *ngIf="nVigilanciaAlta == 0" id="nvA" color="verde2" (click)="onVNA()">
+                    <ion-icon name="flask-outline"></ion-icon>
+                  </ion-button>
+                  <ion-button *ngIf="nVigilanciaAlta == 1" style="border-radius: 12px; border: 5px solid silver"
+                    id="nvA" color="verde2" (click)="onVNA()">
+                    <ion-icon name="flask-outline"></ion-icon>
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+          <ion-col size="4">
+            <ion-grid>
+              <ion-row>
+                <ion-col class="borde" size="12"><b>Positivo</b></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="borde">
+                  Ultimo positivo sin confirmar
+                </ion-col>
+                <ion-col class="borde">
+                  Ultimo positivo confirmado
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="borde">
+                  <ion-button *ngIf="positivoPc == 0" id="pcS" color="warning" (click)="onPc()">
+                    <ion-icon name="warning"></ion-icon>
+                  </ion-button>
+                  <ion-button *ngIf="positivoPc == 1" style="border-radius: 12px; border: 5px solid silver" id="pcS"
+                    color="warning" (click)="onPc()">
+                    <ion-icon name="warning"></ion-icon>
+                  </ion-button>
+                </ion-col>
+                <ion-col class="borde">
+                  <ion-button *ngIf="positivoLab == 0" id="labC" color="danger" (click)="onLab()">
+                    <ion-icon name="skull"></ion-icon>
+                  </ion-button>
+                  <ion-button *ngIf="positivoLab == 1" style="border-radius: 12px; border: 5px solid silver" id="labC"
+                    color="danger" (click)="onLab()">
+                    <ion-icon name="skull"></ion-icon>
+                  </ion-button>
+                </ion-col>
+
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+
+
+
+
+
+
+    <div id="toolFma" style="width: 20%; height: 88%;position: absolute;border:1px solid blue;">
+      <ion-grid *ngIf="filtroFma">
+        <ion-row>
+          <ion-col class="bordeH" size="12">
+            <b>Información de Riesgo Movimiento</b>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="borde" size="6">
+            RUP
+          </ion-col>
+          <ion-col class="borde" size="6">
+            <ion-label><b>{{rup}}</b></ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="borde" size="6">
+            Clasificación Riesgo Movimiento
+          </ion-col>
+          <ion-col class="borde" size="6">
+            <ion-label><b>{{clasificacionRiesgo}}</b></ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="borde" size="6">
+            Nivel Tipo Establecimiento-Rubro
+          </ion-col>
+          <ion-col class="borde" size="6">
+            <ion-label><b>{{nivelTE_Rubro}}</b></ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="borde" size="6">
+            Flujo FMA Entrada
+          </ion-col>
+          <ion-col class="borde" size="6">
+            <ion-label><b>{{flujoFmaIn}}</b></ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="borde" size="6">
+            Flujo FMA Salida
+          </ion-col>
+          <ion-col class="borde" size="6">
+            <ion-label><b>{{flujoFmaOut}}</b></ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="borde" size="6">
+            Nivel de Vigilancia
+          </ion-col>
+          <ion-col class="borde" size="6">
+            <ion-label><b>{{nivelVigilanciaT}}</b></ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="borde" size="6">
+            Todo Negativo Ultimo Protocolo
+          </ion-col>
+          <ion-col class="borde" size="6">
+            <ion-label><b>{{todoNegativo}}</b></ion-label>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="borde" size="6">
+            Positivo Ultimo Protocolo
+          </ion-col>
+          <ion-col class="borde" size="6">
+            <ion-label><b>{{positivoUl}}</b></ion-label>
+          </ion-col>
+        </ion-row>
+        <!-- <ion-row>
+          <ion-col class="bordeH" size="12">
+            <b>Acciones</b>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="borde" size="6">
+            <ion-button size="small" >
+              SINAP
+            </ion-button>
+          </ion-col>
+          <ion-col class="borde" size="6">
+          
+          </ion-col>
+        </ion-row> -->
+
+      </ion-grid>
+    </div>
+    <div id="mapId5" style="width: 100%; height: 100%;position: relative;border:1px solid blue;" class="mapsd"></div>
+    <div id="tiempo" *ngIf="reproductorFma" style="width: 100%;">
+      <ion-grid>
+        <ion-row>
+          <ion-col class="bordeH" size="2">
+            <div *ngIf="flagMovPress == 0">Linea de Tiempo Movimiento</div>
+            <div *ngIf="flagMovPress == 1">Linea de Tiempo Movimiento Entrada</div>
+            <div *ngIf="flagMovPress == 2">Linea de Tiempo Movimiento Salida</div>
+          </ion-col>
+          <ion-col class="borde" size="2">
+
+            <ion-button *ngIf="flagMovPress == 1" style="border: 2px solid orange;" color="tertiary" size="small"
+              (click)="ir()">
+              <ion-icon name="caret-forward"></ion-icon>Entrada
+            </ion-button>
+            <ion-button *ngIf="flagMovPress != 1" color="tertiary" size="small" (click)="ir()">
+              <ion-icon name="caret-forward"></ion-icon>Entrada
+            </ion-button>
+          </ion-col>
+          <ion-col class="borde" size="2">
+            <ion-button *ngIf="flagMovPress == 2" style="border: 2px solid orange;" color="verde2" size="small"
+              (click)="irOut()">
+              <ion-icon name="caret-forward"></ion-icon>Salida
+            </ion-button>
+            <ion-button *ngIf="flagMovPress != 2" color="verde2" size="small" (click)="irOut()">
+              <ion-icon name="caret-forward"></ion-icon>Salida
+            </ion-button>
+          </ion-col>
+          <ion-col class="borde" size="1">
+            <ion-button color="danger" size="small" (click)="limpiarLineas()">
+              <ion-icon name="play-skip-back"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col class="borde" size="5">
+            <ion-segment scrollable="true">
+              <span id="calaa" *ngFor="let zX of calendario">
+                <div id="{{zX.fechaFmaCal}}" class="cuboDia pastando" (click)="irMovDiaIn(zX.fechaFmaCal)">
+                  <div>{{zX.fechaPrint}} </div>
+                </div>
+              </span>
+            </ion-segment>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+
+
+
+  </ion-content>
+
+
+  <app-explore-container name="Riesgo Movimiento"></app-explore-container>
+</ion-content>

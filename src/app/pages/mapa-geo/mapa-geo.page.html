@@ -1,0 +1,763 @@
+<ion-header>
+
+</ion-header>
+<ion-content>
+  <!-- <div >
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+        
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div> -->
+  <nav style="width: 100%;height:9%; position: absolute;border:1px solid blue;">
+    <div class="menu-item">Inicio
+      <div class="sub-menu">
+        <div class="sub-menu-item" *ngIf="logeado">{{ nombreUsuarioLogeado }}</div>
+        <div class="sub-menu-item" *ngIf="logeado">
+          <a href="javascript:void(0);" (click)="logout()">Salir</a>
+        </div>
+      </div>
+    </div>
+    <div class="menu-item">
+      Capas
+      <div class="sub-menu">
+        <div class="sub-menu-item">Nueva Capa</div>
+        <hr>
+
+      </div>
+    </div>
+    <div class="menu-item">
+      Herramientas
+      <div class="sub-menu">
+        <div class="sub-menu-item" (click)="toolDragClick()">{{textoMenuToolDrag}}</div>
+
+      </div>
+    </div>
+    <div class="menu-item">
+      Ayuda
+      <div class="sub-menu">
+        <div class="sub-menu-item" (click)="aboutGeoMap()"> Sobre GeoMap-SSA Beta</div>
+      </div>
+    </div>
+
+  </nav>
+  <div id="toolFma"
+    style="width: 25%;margin-top:4%; height: 81%;position: absolute;border:1px solid blue;overflow: auto;">
+    <ion-accordion-group [value]="['233']">
+      <ion-accordion value="233">
+        <ion-item slot="header" color="oscurogris">
+          Regiones
+        </ion-item>
+        <div style="width: 100%;" slot="content">
+          <div style="height: 350px;overflow: auto;">
+            <ion-grid>
+              <ion-row *ngFor="let item of listaRegionesMaster">
+                <ion-col size="1" class="borde3">
+                  <div style="width: 20px;height: 20px;border:1px solid white;">
+                    <ion-checkbox id="r_{{item.idRegion}}"
+                      (ionChange)="checkFiltroRegion(item.idRegion,this)"></ion-checkbox>
+                  </div>
+                </ion-col>
+                <ion-col class="borde3">
+                  <span style="font-size: 10px;">{{item.nombre}}</span>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </div>
+      </ion-accordion>
+      <ion-accordion value="first">
+        <ion-item slot="header" color="oscurogris">
+          Capas
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <div style="height: 350px;overflow: auto;">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="3" class="borde2">
+                  Establecimientos SIPEC
+                </ion-col>
+                <ion-col size="3" class="borde2">
+                  <div *ngIf="sipecRupLabel == 'Con Datos'">
+                    {{sipecRupLabel}}
+                    <ion-icon style="width: 30px;height: 15px;" color="success" name="cloud-done"></ion-icon>
+                  </div>
+                  <div *ngIf="sipecRupLabel == 'Vacio'">
+                    <div>{{sipecRupLabel}}</div>
+                    <ion-icon style="width: 30px;height: 15px;margin-left: 5px;" color="danger"
+                      name="cloud-offline"></ion-icon>
+                  </div>
+
+                </ion-col>
+                <ion-col size="2" class="borde2Boton">
+                  <a href="javascript:void(0);" (click)="presentAlert()">cargar</a>
+                  <!-- <ion-button class="boton" ></ion-button> -->
+                </ion-col>
+                <ion-col size="4" class="borde2Boton">
+                  <ion-toggle (ionChange)="checkSipec($event)">ver</ion-toggle>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="3" class="borde2">
+                  Clasificación Sanitaria
+                </ion-col>
+                <ion-col size="3" class="borde2">
+                  <div *ngIf="clasificacionSanitaLabel == 'Con Datos'">
+                    {{clasificacionSanitaLabel}}
+                    <ion-icon style="width: 30px;height: 15px" color="success" name="cloud-done"></ion-icon>
+                  </div>
+                  <div *ngIf="clasificacionSanitaLabel == 'Vacio'">
+                    {{clasificacionSanitaLabel}}
+                    <ion-icon style="width: 30px;height: 15px" color="danger" name="cloud-offline"></ion-icon>
+                  </div>
+                </ion-col>
+                <ion-col size="2" class="borde2Boton">
+                  <a href="javascript:void(0);" (click)="presentAlertClasSani()">cargar</a>
+                  <!-- <ion-button class="boton" (click)="presentAlertClasSani()">cargar</ion-button> -->
+                </ion-col>
+                <ion-col size="4" class="borde2Boton">
+                  <ion-toggle (ionChange)="checkClasifcacionSSA($event)">ver</ion-toggle>
+                </ion-col>
+              </ion-row>
+              <!-- <ion-row>
+                <ion-col size="3" class="bordeH2">
+                  Denuncias SSA
+                </ion-col>
+                <ion-col size="3" class="borde2">
+                  <div style="width: 100%;">
+                    <div style="width: 60px">Vacio</div>
+                    <ion-icon style="width: 30px;height: 15px;" color="danger" name="cloud-offline"></ion-icon>
+                  </div>
+                </ion-col>
+                <ion-col size="2" class="borde2Boton">
+                  <a href="javascript:void(0);">cargar</a>
+                </ion-col>
+                <ion-col size="4" class="borde2Boton">
+                  <ion-toggle>ver</ion-toggle>
+                </ion-col>
+              </ion-row> -->
+              <ion-row>
+                <ion-col size="3" class="borde2">
+                  Vigilancia SSA
+                </ion-col>
+                <ion-col size="3" class="borde2">
+                  <div *ngIf="vigilanciaSSALabel == 'Con Datos'">
+                    {{vigilanciaSSALabel}}
+                    <ion-icon style="width: 30px;height: 15px" color="success" name="cloud-done"></ion-icon>
+                  </div>
+                  <div *ngIf="vigilanciaSSALabel == 'Vacio'">
+                    {{vigilanciaSSALabel}}
+                    <ion-icon style="width: 30px;height: 15px" color="danger" name="cloud-offline"></ion-icon>
+                  </div>
+                </ion-col>
+                <ion-col size="2" class="borde2Boton">
+                  <a href="javascript:void(0);" (click)="presentAlertVigilanciaSSA()">cargar</a>
+                </ion-col>
+                <ion-col size="4" class="borde2Boton">
+                  <ion-toggle (ionChange)="checkVigilanciaSSA($event)">ver</ion-toggle>
+                </ion-col>
+              </ion-row>
+              <!-- <ion-row>
+              <ion-col size="3" class="bordeH2">
+                Zonas
+              </ion-col>
+              <ion-col size="3" class="borde2">
+                <div>
+                  <div>Vacio</div>
+                  <ion-icon style="width: 30px;height: 15px" color="danger" name="cloud-offline"></ion-icon>
+                </div>
+              </ion-col>
+              <ion-col size="3" class="borde2Boton">
+                <ion-button class="boton">cargar</ion-button>
+              </ion-col>
+              <ion-col size="3" class="borde2Boton">
+                <ion-toggle>ver</ion-toggle>
+              </ion-col>
+            </ion-row> -->
+              <ion-row>
+                <ion-col size="3" class="borde2">
+                  Regiones
+                </ion-col>
+                <ion-col size="3" class="borde2">
+                  <div *ngIf="regionesLabel == 'Con Datos'">
+                    {{regionesLabel}}
+                    <ion-icon style="width: 30px;height: 15px" color="success" name="cloud-done"></ion-icon>
+                  </div>
+                  <div *ngIf="regionesLabel == 'Vacio'">
+                    {{regionesLabel}}
+                    <ion-icon style="width: 30px;height: 15px" color="danger" name="cloud-offline"></ion-icon>
+                  </div>
+                </ion-col>
+                <ion-col size="2" class="borde2Boton">
+                  <a href="javascript:void(0);" (click)="presentAlertRegiones()">cargar</a>
+                  <!-- <ion-button class="boton" (click)="presentAlertRegiones()">cargar</ion-button> -->
+                </ion-col>
+                <ion-col size="4" class="borde2Boton">
+                  <ion-toggle (ionChange)="checkRegiones($event)">ver</ion-toggle>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="3" class="borde2">
+                  Provincia
+                </ion-col>
+                <ion-col size="3" class="borde2">
+                  <div *ngIf="provinciaLabel == 'Con Datos'">
+                    {{provinciaLabel}}
+                    <ion-icon style="width: 30px;height: 15px" color="success" name="cloud-done"></ion-icon>
+                  </div>
+                  <div *ngIf="provinciaLabel == 'Vacio'">
+                    {{provinciaLabel}}
+                    <ion-icon style="width: 30px;height: 15px" color="danger" name="cloud-offline"></ion-icon>
+                  </div>
+                </ion-col>
+                <ion-col size="2" class="borde2Boton">
+                  <a href="javascript:void(0);" (click)="presentAlertProvincia()">cargar</a>
+                  <!-- <ion-button class="boton" (click)="presentAlertProvincia()">cargar</ion-button> -->
+                </ion-col>
+                <ion-col size="4" class="borde2Boton">
+                  <ion-toggle (ionChange)="checkProvincias($event)">ver</ion-toggle>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="3" class="borde2">
+                  Comuna
+                </ion-col>
+                <ion-col size="3" class="borde2">
+                  <div *ngIf="comunaLabel == 'Con Datos'">
+                    {{comunaLabel}}
+                    <ion-icon style="width: 30px;height: 15px" color="success" name="cloud-done"></ion-icon>
+                  </div>
+                  <div *ngIf="comunaLabel == 'Vacio'">
+                    {{comunaLabel}}
+                    <ion-icon style="width: 30px;height: 15px" color="danger" name="cloud-offline"></ion-icon>
+                  </div>
+                </ion-col>
+                <ion-col size="2" class="borde2Boton">
+                  <a href="javascript:void(0);" (click)="presentAlertComuna()">cargar</a>
+                  <!-- <ion-button class="boton" (click)="presentAlertComuna()">cargar</ion-button> -->
+                </ion-col>
+                <ion-col size="4" class="borde2Boton">
+                  <ion-toggle (ionChange)="checkComunas($event)">ver</ion-toggle>
+                </ion-col>
+              </ion-row>
+              <!-- <ion-row>
+              <ion-col size="4" class="bordeH2">
+                LEEP ECZE
+              </ion-col>
+              <ion-col size="4" class="borde2">
+                Vacio
+              </ion-col>
+              <ion-col size="4" class="borde2Boton">
+                <ion-button class="boton">cargar</ion-button>
+              </ion-col>
+            </ion-row> -->
+            </ion-grid>
+          </div>
+        </div>
+      </ion-accordion>
+      <ion-accordion value="misCapasAccor">
+        <ion-item slot="header" color="oscurogris">
+          Mis Capas
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <div style="height: 350px;overflow: auto;">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="3" class="borde2">
+                  Nombre de la capa
+                </ion-col>
+                <ion-col size="3" class="borde2">
+                  Capa publica
+                </ion-col>
+                <ion-col size="2" class="borde2Boton">
+                  Eliminar
+                </ion-col>
+                <ion-col size="4" class="borde2Boton">
+                  <ion-toggle (ionChange)="checkSipec($event)">ver</ion-toggle>
+                </ion-col>
+              </ion-row>
+
+            </ion-grid>
+          </div>
+        </div>
+      </ion-accordion>
+      <ion-accordion value="4">
+        <ion-item slot="header" color="oscurogris">
+          Filtros
+        </ion-item>
+        <div style="width: 100%;" slot="content">
+
+          <div style="height: 350px;overflow: auto;">
+            -------- Tipo establecimiento
+            <ion-grid>
+              <ion-row *ngFor="let item of listaTipoEstabMaster">
+                <ion-col size="1">
+                  <div style="width: 20px;height: 20px;border:1px solid white;">
+                    <ion-checkbox id="{{item.id}}" checked="false"
+                      (ionChange)="checkFiltroTipoEstab(item.id,this)"></ion-checkbox>
+                  </div>
+                </ion-col>
+
+                <ion-col>
+                  <span style="font-size: 10px;">{{item.nombre}}</span>
+                </ion-col>
+
+              </ion-row>
+            </ion-grid>
+            -------- Rubro
+            <ion-grid>
+              <ion-row *ngFor="let item of rubroColoresList">
+                <ion-col size="1">
+                  <div style="width: 20px;height: 20px;border:1px solid white;background-color:{{item.color}}">
+                    <ion-checkbox id="{{item.id}}" checked="false"
+                      (ionChange)="checkFiltroRubro(item.rubro,this)">{{item.rubro}}</ion-checkbox>
+                  </div>
+                </ion-col>
+                <ion-col size="1">
+                  <div style="width: 20px;height: 20px;border:1px solid white;background-color:{{item.color}}">
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <span style="font-size: 10px;">{{item.rubro}}</span>
+                </ion-col>
+
+              </ion-row>
+            </ion-grid>
+            -------- Clasificación Sanitaria
+            <ion-grid>
+              <ion-row>
+                <ion-col size="1">
+                  <div style="width: 20px;height: 20px;border:1px solid white;">
+                    <ion-checkbox id="Rs_0" checked="false" (ionChange)="checkFiltroClasiR(0,this)"></ion-checkbox>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <span style="font-size: 10px;">Coincidencia con filtro tipo establecimienti/rubro</span>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="1">
+                  <div style="width: 20px;height: 20px;border:1px solid white;">
+                    <ion-checkbox id="Rs_1" checked="false" (ionChange)="checkFiltroClasiR(1,this)"></ion-checkbox>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <span style="font-size: 10px;">Positivo</span>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="1">
+                  <div style="width: 20px;height: 20px;border:1px solid white;">
+                    <ion-checkbox id="Rs_2" checked="false" (ionChange)="checkFiltroClasiR(2,this)"></ion-checkbox>
+                  </div>
+                </ion-col>
+                <ion-col>
+                  <span style="font-size: 10px;">Negativo</span>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+
+
+        </div>
+      </ion-accordion>
+      <!-- <ion-accordion value="22">
+        <ion-item slot="header" color="rojosanitario">
+          Resultados SSA por Región
+        </ion-item>
+        <div style="width: 100%;" slot="content">
+          <div style="height: 350px;overflow: auto;">
+            <ion-grid>
+              <ion-row *ngFor="let item of listaRegionesMaster">
+                <ion-col class="borde3">
+                  <span style="font-size: 10px;">{{item.nombre}}</span>
+                </ion-col>
+                <ion-col size="3" class="borde3">
+                  <div id="item.correlativo" *ngIf="item.existe == true">
+                    Con Resultados
+                    <ion-icon style="width: 30px;height: 10px;" color="success" name="cloud-done"></ion-icon>
+                  </div>
+                  <div id="item.correlativo" *ngIf="item.existe == false">
+                    Sin Resultados
+                    <ion-icon style="width: 30px;height: 10px;" color="danger" name="cloud-offline"></ion-icon>
+                  </div>
+                </ion-col>
+                <ion-col size="3" class="borde3">
+                  <ion-button class="boton3" (click)="presentAlertResultado(item.idRegion)">cargar ssa</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </div>
+      </ion-accordion> -->
+
+
+      <ion-accordion value="2">
+        <ion-item slot="header" color="oscurogris">
+          Configuración
+        </ion-item>
+        <div style="width: 100%;" slot="content">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="4" class="bordeH2">
+                Kilometros RUP
+                (1000 = 1 KM)
+              </ion-col>
+              <ion-col size="4" class="borde2Input">
+                <ion-input style="border:1px solid black;height: 25px;" type="number"
+                  [(ngModel)]="radioRup"></ion-input>
+              </ion-col>
+              <ion-col size="4" class="borde2Boton">
+                <ion-button style="height: 20px;" class="boton" (click)="guardarRadioRup()">guardar</ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="4" class="bordeH2">
+                Tiempo milisegundos animacion vigilancia SSA
+              </ion-col>
+              <ion-col size="4" class="borde2Input">
+                <ion-input style="border:1px solid black;height: 25px;" type="number"
+                  [(ngModel)]="tiempoAnimacion"></ion-input>
+              </ion-col>
+              <ion-col size="4" class="borde2Boton">
+                <ion-button style="height: 20px;" class="boton" (click)="guardarTiempoAnimacion()">guardar</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+  </div>
+  <div id="mapId5"
+    style="margin-left:25%;margin-top:4%; width: 75%; height: 81%;position: relative;border:1px solid blue;"
+    class="mapsd"></div>
+  <div style="width: 100%; height: 80px;position: absolute;border:1px solid blue;">
+    <div *ngIf="visualizaTiempoVigilanciaSSA">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="1">
+            <ion-button *ngIf="contadorGlobalLineaTiempoVSsa==1 || contadorGlobalLineaTiempoVSsa==2"
+              style="border: 2px solid orange;" color="verde2" size="small" (click)="playVigilanciaSSA()">
+              <ion-icon name="caret-forward"></ion-icon>
+            </ion-button>
+            <ion-button *ngIf="contadorGlobalLineaTiempoVSsa==0" style="border: 2px solid orange;" color="danger"
+              size="small" (click)="stopVigilanciaSSA()">
+              <ion-icon name="stop"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="11">
+            <ion-segment scrollable="true">
+              <span id="calaa" *ngFor="let zX of lineaTiempoVigilanciaSSA">
+                <div id="{{zX.fechaprint}}" class="cuboDia pastando" (click)="irDia(zX.fechaReal,zX.fechaprint)">
+                  <div>{{zX.fechaprint}} </div>
+                </div>
+              </span>
+            </ion-segment>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+  <ion-modal id="modal2" trigger="open-modal2" [initialBreakpoint]="0.55" [breakpoints]="[0, 0.25, 0.5, 0.75]"
+    handleBehavior="cycle" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">cancelar</ion-button>
+          </ion-buttons>
+
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">confirmar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-label position="stacked">Ingrese el nombre de la zona</ion-label>
+          <ion-input type="text" [(ngModel)]="nombreZona"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Ingrese el nombre del lugar</ion-label>
+          <ion-input type="text" [(ngModel)]="nombreLugar"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Ingrese el nombre de la comuna</ion-label>
+          <ion-input type="text" [(ngModel)]="nombreComuna"></ion-input>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  <div *ngIf="mostrarDivFlotante" class="overlay">
+    <div class="mi-div-flotante">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="11" class="bordeH">
+            <b>GeoMap SSA</b>
+          </ion-col>
+          <ion-col size="1" class="bordeH" style="text-align: center;">
+            <ion-button size="small" color="danger" (click)="cerrarPopup();">X</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" class="bordeH">
+            Identificación Establecimiento
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12" class="borde">
+            <div style="font-size: 20px;">
+              {{rupForm}}
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6" class="bordeH">
+            Tipo Establecimiento
+          </ion-col>
+          <ion-col size="6" class="bordeH">
+            Rubro
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6" class="borde">
+            {{tipoEstabForm}}
+          </ion-col>
+          <ion-col size="6" class="borde">
+            {{rubroForm}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6" class="bordeH">
+            Clasificación Sanitaria
+          </ion-col>
+          <ion-col size="6" class="bordeH">
+            Fecha Clasificación Sanitaria
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6" class="borde">
+            {{clasificacionSanitariaActualForm}}
+          </ion-col>
+          <ion-col size="6" class="borde">
+            {{fechaClasificacionForm}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12" class="bordeH">
+            Medidas Sanitarias Aplicadas
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12" class="borde">
+            {{medidasSanitariasForm}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-item *ngIf="contieneRupsEncontrados"><ion-button (click)="verRupsEncontrados()" color="warning">Obtener RUP
+          dentro del radio</ion-button></ion-item>
+    </div>
+    <div *ngIf="mostrarDivFlotante2" class="mi-div-flotante2">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="10" class="bordeH">
+            <b>Establecimientos dentro del radio</b>
+          </ion-col>
+          <ion-col size="1" class="bordeH" style="text-align: center;">
+            <ion-button size="small" color="success" (click)="descargarSabanaExcel();">Xls</ion-button>
+          </ion-col>
+          <ion-col size="1" class="bordeH" style="text-align: center;">
+            <ion-button size="small" color="danger" (click)="cerrarPopup2();">X</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div style="height: 300px;overflow: auto;">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="2" class="bordeH2">RUP</ion-col>
+            <ion-col size="2" class="bordeH2">Tipo Establecimiento</ion-col>
+            <ion-col size="2" class="bordeH2">Rubro</ion-col>
+            <ion-col size="3" class="bordeH2">Clasificación Sanitaria</ion-col>
+            <ion-col size="1" class="bordeH2">Fecha Clasificación</ion-col>
+            <ion-col size="2" class="bordeH2">Medidas Sanitarias</ion-col>
+          </ion-row>
+
+          <ion-row *ngFor="let item of listadoRupsEncontrados">
+            <ion-col size="2" class="borde2Cell">{{item.rup}}</ion-col>
+            <ion-col size="2" class="borde2Cell">{{item.tipoEstab}}</ion-col>
+            <ion-col size="2" class="borde2Cell">{{item.rubro}}</ion-col>
+            <ion-col size="3" class="borde2Cell">{{item.clasificacionSanitariaActualForm}}</ion-col>
+            <ion-col size="1" class="borde2Cell">{{item.fechaClasificacionForm}}</ion-col>
+            <ion-col size="2" class="borde2Cell">{{item.medidasSanitariasForm}}</ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="mostrarDivFlotanteTime">
+    <div class="mi-div-flotante3">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" class="bordeH">
+            <b>Fecha toma muestra</b>
+          </ion-col>
+
+        </ion-row>
+        <ion-row>
+          <ion-col size="12" class="borde">
+            <b>{{fechaTomaMuestraLabel}}</b>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+  <div *ngIf="mostrarDivFlotanteSel" class="overlay">
+    <div class="mi-div-flotante">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="11" class="bordeH">
+            <b>GeoMap SSA - Modulo Selección </b>
+          </ion-col>
+          <ion-col size="1" class="bordeH" style="text-align: center;">
+            <ion-button size="small" color="danger" (click)="cerrarPopupSel();">X</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-item *ngIf="contieneRupsEncontrados">
+        <ion-button (click)="verRupsEncontrados()" color="warning">Obtener RUP
+          dentro del radio</ion-button></ion-item>
+    </div>
+    <div *ngIf="mostrarDivFlotante2" class="mi-div-flotante2">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8" class="bordeH">
+            <b>Establecimientos dentro del radio</b>
+          </ion-col>
+          <ion-col size="2" class="bordeH" style="text-align: center;">
+            <ion-button size="small" color="naranjo1" (click)="quitarEstab();">Quitar RUP</ion-button>
+          </ion-col>
+          <ion-col size="1" class="bordeH" style="text-align: center;">
+            <ion-button size="small" color="success" (click)="descargarSabanaExcel();">Xls</ion-button>
+          </ion-col>
+          <ion-col size="1" class="bordeH" style="text-align: center;">
+            <ion-button size="small" color="danger" (click)="cerrarPopup2();">X</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div style="height: 300px;overflow: auto;">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="2" class="bordeH2">RUP</ion-col>
+            <ion-col size="2" class="bordeH2">Tipo Establecimiento</ion-col>
+            <ion-col size="2" class="bordeH2">Rubro</ion-col>
+            <ion-col size="3" class="bordeH2">Clasificación Sanitaria</ion-col>
+            <ion-col size="1" class="bordeH2">Fecha Clasificación</ion-col>
+            <ion-col size="2" class="bordeH2">Medidas Sanitarias</ion-col>
+          </ion-row>
+
+          <ion-row *ngFor="let item of listadoRupsEncontrados">
+            <ion-col size="2" class="borde2Cell">{{item.rup}}</ion-col>
+            <ion-col size="2" class="borde2Cell">{{item.tipoEstab}}</ion-col>
+            <ion-col size="2" class="borde2Cell">{{item.rubro}}</ion-col>
+            <ion-col size="3" class="borde2Cell">{{item.clasificacionSanitariaActualForm}}</ion-col>
+            <ion-col size="1" class="borde2Cell">{{item.fechaClasificacionForm}}</ion-col>
+            <ion-col size="2" class="borde2Cell">{{item.medidasSanitariasForm}}</ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!logeado" class="overlay">
+    <div class="mi-div-flotante">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" class="bordeH">
+            <b>GeoMap SSA - Ingreso</b>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <form (ngSubmit)="login(fLogin)" #fLogin="ngForm" class="background-transparent">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col>
+
+              <ion-item color="none">
+                <ion-label position="stacked">Nombre de usuario</ion-label>
+                <br>
+                <ion-input name="nombre de usuario" type="user" [(ngModel)]="loginUser.userName" required></ion-input>
+              </ion-item>
+              <ion-item color="none">
+                <ion-label position="stacked">Password</ion-label>
+                <br>
+                <ion-input name="password" type="password" [(ngModel)]="loginUser.password" required></ion-input>
+              </ion-item>
+
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-button type="submit" color="verde2" style="width: 100%" size="small">
+                Ingresar
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="mostrarDivCargandoEstab" class="overlay">
+    <div class="mi-div-flotanteCargandoEstab">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" class="bordeH">
+            <b>GeoMap SSA - Cargando Establecimientos </b>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-slides>
+        <ion-slide>
+          <h1>Slide 1</h1>
+        </ion-slide>
+        <ion-slide>
+          <h1>Slide 2</h1>
+        </ion-slide>
+        <ion-slide>
+          <h1>Slide 3</h1>
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+  </div>
+  <div *ngIf="mostrarDivAboutGeoMapSSA" class="overlay">
+    <div class="mi-div-flotanteCargandoEstab">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="11" class="bordeH">
+            <b>GeoMap SSA </b>
+          </ion-col>
+          <ion-col size="1" class="bordeH" style="text-align: center;">
+            <ion-button size="small" color="danger" (click)="cerrarPopupAbout();">X</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div style="padding: 2%;text-align: center;">
+        <b>Bienvenido a GeoMap-SSA</b>
+        <p>La plataforma se encuentra actualmente en versión 'beta' y en proceso de construcción para mejorar su
+          funcionalidad y añadir nuevas características. Actualmente, es posible acceder a información de
+          establecimientos avícolas en el SIPEC, así como información sanitaria disponible en el sistema SSA (Sanidad
+          Animal).
+          Además, cuenta con formas o polígonos para Regiones, Provincias y Comunas.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</ion-content>

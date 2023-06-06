@@ -1,0 +1,183 @@
+<ion-header>
+  <ion-toolbar color="verde2">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="1">
+          <img src="../../../assets/img/logo-sag.png" width="30" height="30" />
+        </ion-col>
+        <ion-col size="11">
+          <h4>GeoMap-SSA </h4>
+          <ion-label size="small">Division Proteccion Pecuaria - Sanidad Animal </ion-label>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+    <ion-button (click)="logout()" *ngIf="logeado" color="danger" slot="end">
+      <ion-icon name="log-out"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="!logeado">
+    <ion-item>
+      <h3 style="width: 100%;text-align: center;">Ingreso</h3>
+    </ion-item>
+
+    <form (ngSubmit)="login(fLogin)" #fLogin="ngForm" class="background-transparent">
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col>
+
+            <ion-item color="none">
+              <ion-label position="stacked">Nombre de usuario</ion-label>
+              <br>
+              <ion-input name="nombre de usuario" type="user" [(ngModel)]="loginUser.userName" required></ion-input>
+            </ion-item>
+            <ion-item color="none">
+              <ion-label position="stacked">Password</ion-label>
+              <br>
+              <ion-input name="password" type="password" [(ngModel)]="loginUser.password" required></ion-input>
+            </ion-item>
+
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" color="verde2" style="width: 100%" size="small">
+              Ingresar
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+  <div *ngIf="logeado">
+    <ion-item size="small">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="small">
+                  Bienvenido
+                </ion-col>
+                <ion-col size="small">
+                  {{ nombreUsuarioLogeado }}
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+          <ion-col size="6">
+
+            <h3 style="width: 100%;text-align: center;">M E N U</h3>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-grid>
+      <!-- <ion-row>
+        <ion-col>
+          <ion-card color="warning">
+            <ion-item color="warning">
+              <ion-icon name="logo-microsoft" slot="start"></ion-icon>
+              <ion-label>Reportes</ion-label>
+              <ion-button color="primary" slot="end" routerLink="/power-bi">Ir</ion-button>
+            </ion-item>
+
+            <ion-card-content>
+              Reportes disponibles de influenza aviar
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col *ngIf="objetoPerfiles.adminDatos == 1">
+          <ion-card color="azul">
+            <ion-item color="azul">
+              <ion-icon name="cloud-download" slot="start"></ion-icon>
+              <ion-label>Descargar Excel Influenza Aviar</ion-label>
+              <ion-button color="primary" slot="end" routerLink="/descargas-excel">Ir</ion-button>
+            </ion-item>
+
+            <ion-card-content>
+              Descarga información en planillas excel para su revisión
+            </ion-card-content>
+          </ion-card>
+
+        </ion-col>
+        <ion-col *ngIf="objetoPerfiles.adminDatos == 1">
+          <ion-card color="naranjo1">
+            <ion-item color="naranjo1">
+              <ion-icon name="cloud-upload" slot="start"></ion-icon>
+              <ion-label>Centro carga de información</ion-label>
+              <ion-button color="primary" slot="end" routerLink="/carga-informacion">Ir</ion-button>
+            </ion-item>
+
+            <ion-card-content>
+              Funcion para subir información obtenida de distintos sistemas
+            </ion-card-content>
+          </ion-card>
+
+        </ion-col>
+       
+      </ion-row> -->
+      <ion-row>
+        <!-- <ion-col *ngIf="objetoPerfiles.adminDatos == 1">
+          <ion-card color="morado">
+            <ion-item color="morado">
+              <ion-icon name="planet" slot="start"></ion-icon>
+              <ion-label>Gestor de Zonas</ion-label>
+              <ion-button color="primary" slot="end" routerLink="/gestor-poligonos">Ir</ion-button>
+            </ion-item>
+
+            <ion-card-content>
+              Funcion para mantener las zonas
+            </ion-card-content>
+          </ion-card>
+
+        </ion-col> -->
+        <!-- <ion-col>
+          <ion-card color="verde">
+            <ion-item color="verde">
+              <ion-icon name="bar-chart" slot="start"></ion-icon>
+              <ion-label>DashBoard</ion-label>
+              <ion-button color="primary" slot="end" routerLink="/dashboard-mortalidad">Ir</ion-button>
+            </ion-item>
+
+            <ion-card-content>
+              Visión generar de la emergencia
+            </ion-card-content>
+          </ion-card>
+
+        </ion-col> -->
+        <ion-col>
+          <ion-card color="morado">
+            <ion-item color="morado">
+              <ion-icon name="planet" slot="start"></ion-icon>
+              <ion-label>GeoMap-SSA-Influenza Aviar</ion-label>
+              <ion-button color="primary" slot="end" routerLink="/mapa-geo">Ir</ion-button>
+            </ion-item>
+
+            <ion-card-content>
+              Modulo de exploración  SIPEC - SSA
+            </ion-card-content>
+          </ion-card>
+
+        </ion-col>
+        
+       
+
+
+      </ion-row>
+
+    </ion-grid>
+  </div>
+
+
+
+
+
+</ion-content>

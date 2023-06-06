@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="1">
+          <img src="../../../assets/img/logo-sag.png" width="30" height="30" />
+        </ion-col>
+        <ion-col size="11">
+          <ion-title>RDPP - Portal de reporteria pecuaria</ion-title>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-button routerLink="/inicio" slot="end">
+      <ion-icon name="home"></ion-icon>
+    </ion-button>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item>
+    <p> Laboratorio que contempla la implementación de una <b> Red Neural Artificial</b>
+      para la clasificación multiclase con entrenamiento supervisado.
+      <br>
+      Para esta ocación utilizaremos datos existentes de <b>SIPEC y SSA</b> para trabajar con <b>Brucelosis Bovina</b>
+      <br>
+
+
+    </p>
+
+
+  </ion-item>
+  <ion-item>
+    <h3 style="width: 100%;text-align: center;">M E N U</h3>
+  </ion-item>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card color="azul">
+          <ion-item color="azul">
+            <ion-icon name="extension-puzzle" slot="start"></ion-icon>
+            <ion-label>Configuración de parametros</ion-label>
+            <ion-button color="primary" slot="end" routerLink="/configuracion">Ir</ion-button>
+          </ion-item>
+
+          <ion-card-content>
+            Entregar los distintos valores segun tipo de información a procesar
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card color="morado">
+          <ion-item color="morado">
+            <ion-icon name="cloud-download" slot="start"></ion-icon>
+
+            <ion-label>Descargar DataSet</ion-label>
+            <ion-button color="primary" slot="end" routerLink="/descarga">Ir</ion-button>
+          </ion-item>
+
+          <ion-card-content>
+            Descargue el DataSet para que la Red Neural prediga los nuevos datos
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-card color="verde2">
+          <ion-item color="verde2">
+            <ion-icon name="git-network" slot="start"></ion-icon>
+
+            <ion-label>Utilizar Red Neural</ion-label>
+            <ion-button color="primary" slot="end" routerLink="/tab1">Ir</ion-button>
+          </ion-item>
+
+          <ion-card-content>
+            Realizar la prediccion usando la Red Neural, es importante que tenga un DataSet descargado
+          </ion-card-content>
+        </ion-card>
+
+
+      </ion-col>
+      <ion-col>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

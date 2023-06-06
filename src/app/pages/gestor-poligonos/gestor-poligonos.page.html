@@ -1,0 +1,174 @@
+<ion-header>
+  <ion-toolbar color="verde2">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="1">
+          <img src="../../../assets/img/logo-sag.png" width="30" height="30" />
+        </ion-col>
+        <ion-col size="11">
+          <h6>RDPPSSA 1.4</h6>
+          <ion-label size="small">Reportes Division Proteccion Pecuaria - Sanidad Animal </ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <!-- <ion-button color="danger" (click)="mortalidades()" slot="end">
+      <ion-icon name="skull" slot="start"></ion-icon>
+      Mortalidades
+    </ion-button> -->
+    <ion-button color="cafe" (click)="quitarTodosPuntos()" slot="end">
+      <ion-icon name="globe" slot="start"></ion-icon>
+      Quitar puntos
+
+    </ion-button>
+    <ion-button routerLink="/inicio" slot="end">
+      <ion-icon name="home"></ion-icon>
+    </ion-button>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="2">
+          <b style="width: 100%;text-align: center;">Gestor de zonas </b>
+        </ion-col>
+        <ion-col size="10">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-item>
+  <div id="toolFma" style="width: 20%; height: 88%;position: absolute;border:1px solid blue;">
+    <ion-item>
+      <p>Semana: <b><i>{{semanaSel}}</i></b> </p>
+    </ion-item>
+    <ion-accordion-group>
+      <ion-accordion value="first">
+        <ion-item slot="header" color="celeste">
+          <b>Acciones de Zona</b>
+        </ion-item>
+        <div style="width: 100%;" slot="content">
+          <ion-grid style="width: 100%;">
+            <ion-row>
+              <ion-col class="bordeH2" size="6">
+                Zona:
+              </ion-col>
+              <ion-col class="borde2" size="6">
+                {{nombreZonaTool}}
+              </ion-col>
+
+            </ion-row>
+            <ion-row>
+              <ion-col class="bordeH2" size="6">
+                Lugar:
+              </ion-col>
+              <ion-col class="borde2" size="6">
+                {{nombreLugarTool}}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="bordeH2" size="6">
+                Estado:
+              </ion-col>
+              <ion-col class="borde2" size="6">
+                <div *ngIf="estadoActualZona == 1">
+                  Abierta
+                </div>
+                <div *ngIf="estadoActualZona == 0">
+                  Cerrada
+                </div>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col style="text-align:center" class="bordeH2" size="12">
+                Acciónes
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col class="borde2" size="12">
+                <ion-button size="small" style="width: 100%" (click)="abrirZona(idZona)" color="verde"
+                  *ngIf="estadoActualZona == 1">Cerrar</ion-button>
+                <ion-button size="small" style="width: 100%" (click)="cerrarZona(idZona)" color="danger"
+                  *ngIf="estadoActualZona == 0">Abrir</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-accordion>
+      <ion-accordion value="second">
+        <ion-item slot="header" color="colorx">
+          <b> Semana Epidemiológica Mortalidad</b>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-grid>
+            <ion-row *ngFor="let item of semanasEpiLista">
+              <ion-col class="borde">
+                <div *ngIf="item.anio == '2022'">
+                  <a href="javascript:void(0);" (click)="mortalidadEpi(item)">{{item.anio}} - {{item.D_2022}}</a>
+                </div>
+                <div *ngIf="item.anio == '2023'">
+                  <a href="javascript:void(0);" (click)="mortalidadEpi(item)">{{item.anio}} - {{item.D_2023}}</a>
+
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <div>
+
+          </div>
+        </div>
+      </ion-accordion>
+      <ion-accordion value="3">
+        <ion-item slot="header" color="warning">
+          <b>Filtros</b>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+
+        </div>
+      </ion-accordion>
+
+    </ion-accordion-group>
+  </div>
+
+  <div id="mapId5" style="margin-left:20%;width: 80%; height: 90%;position: relative;border:1px solid blue;"
+    class="mapsd"></div>
+
+  <ion-modal trigger="open-modal" [initialBreakpoint]="0.55" [breakpoints]="[0, 0.25, 0.5, 0.75]" handleBehavior="cycle"
+    (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">cancelar</ion-button>
+          </ion-buttons>
+
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">confirmar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-label position="stacked">Ingrese el nombre de la zona</ion-label>
+          <ion-input type="text" [(ngModel)]="nombreZona"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Ingrese el nombre del lugar</ion-label>
+          <ion-input type="text" [(ngModel)]="nombreLugar"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Ingrese el nombre de la comuna</ion-label>
+          <ion-input type="text" [(ngModel)]="nombreComuna"></ion-input>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

@@ -1,0 +1,19 @@
+.cell-class {
+    
+    border-width: .01em; 
+    // border-style:solid; margin-bottom : -1px;
+    
+    font-size:13px;
+  }
+
+
+  .leaflet-routing-container .leaflet-routing-error {
+    width: 320px;
+    background-color: white;
+    padding-top: 4px;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    display: none;
+}
+
+  
